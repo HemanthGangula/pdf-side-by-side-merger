@@ -285,10 +285,85 @@ export default function Home() {
           </div>
         </section>
 
+        {/* SEO Content Section */}
+        <article className="max-w-4xl mx-auto mb-12 sm:mb-16 space-y-8 sm:space-y-10">
+          <section>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              What Is a Side-by-Side PDF Merger?
+            </h2>
+            <div className="space-y-4 text-base sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+              <p>
+                A side-by-side PDF merger is a specialized tool that combines two PDF documents by placing their corresponding pages horizontally next to each other. Unlike traditional PDF mergers that stack pages vertically (one document after another), this tool creates a new PDF where page 1 of the first document appears alongside page 1 of the second document, page 2 with page 2, and so on.
+              </p>
+              <p>
+                This unique approach to <strong>merging PDFs side by side</strong> is particularly valuable for document comparison, translation work, and educational materials. Instead of switching between two separate PDFs, you can view both documents simultaneously on a single page, making it easier to spot differences, verify translations, or study parallel content.
+              </p>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              Common Use Cases
+            </h2>
+            <div className="space-y-4 text-base sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+              <p>
+                Our side-by-side PDF tool serves a variety of professional and personal needs:
+              </p>
+              <ul className="list-disc list-inside space-y-2 ml-4">
+                <li><strong>Document Comparison:</strong> Compare two PDF files to identify changes between contract versions, legal documents, or revised manuscripts.</li>
+                <li><strong>Translation Review:</strong> Place original and translated documents side by side for accurate translation verification and quality assurance.</li>
+                <li><strong>Dual-Language Materials:</strong> Create bilingual educational resources, instruction manuals, or presentations with parallel language support.</li>
+                <li><strong>Before and After Analysis:</strong> Display original and edited versions of reports, proposals, or design documents for easy reference.</li>
+                <li><strong>Academic Research:</strong> Compare research papers, study notes, or annotated versions of scholarly articles.</li>
+              </ul>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              Privacy and Security
+            </h2>
+            <div className="space-y-4 text-base sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+              <p>
+                Your document security is our top priority. When you <strong>merge PDFs side by side</strong> using our tool, all processing happens entirely within your web browser. This means your PDF files never leave your device and are never uploaded to our servers or any third-party services.
+              </p>
+              <p>
+                We don't store, track, or have access to your documents. No account creation is required, no cookies are used for tracking, and no data is collected. This browser-based approach ensures complete privacy, making it safe to work with sensitive documents like legal contracts, financial reports, or confidential business materials.
+              </p>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              Why Use a Browser-Based Tool?
+            </h2>
+            <div className="space-y-4 text-base sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+              <p>
+                Browser-based PDF tools offer significant advantages over traditional desktop software or server-based services:
+              </p>
+              <ul className="list-disc list-inside space-y-2 ml-4">
+                <li><strong>No Installation Required:</strong> Works instantly in any modern web browser without downloading or installing software.</li>
+                <li><strong>Cross-Platform Compatibility:</strong> Use on Windows, Mac, Linux, or any device with a web browser.</li>
+                <li><strong>Always Up-to-Date:</strong> Access the latest features automatically without manual updates.</li>
+                <li><strong>Complete Privacy:</strong> Your files stay on your device, eliminating security concerns about cloud storage.</li>
+                <li><strong>Free and Unlimited:</strong> No subscription fees, file size limits, or usage restrictions.</li>
+              </ul>
+              <p>
+                Our tool leverages modern web technologies to provide fast, efficient PDF processing entirely client-side, giving you professional-grade results while maintaining the highest standards of privacy and convenience.
+              </p>
+            </div>
+          </section>
+        </article>
+
         {/* Footer */}
         <footer className="text-center text-sm text-gray-500 dark:text-gray-400 animate-fadeIn" style={{ animationDelay: '0.6s' }}>
           <p className="mb-2">All processing happens in your browser. Your files are never uploaded to any server.</p>
-          <p className="text-xs">© 2026 PDF Side-by-Side Merger. Open source and privacy-focused.</p>
+          <p className="text-xs">
+            © 2026 PDF Side-by-Side Merger. Open source and privacy-focused. 
+            <a href="https://github.com/yourusername/pdf-side-by-side-merger" className="ml-2 hover:text-gray-700 dark:hover:text-gray-300 underline" target="_blank" rel="noopener noreferrer">
+              View on GitHub
+            </a>
+          </p>
         </footer>
       </div>
     </div>

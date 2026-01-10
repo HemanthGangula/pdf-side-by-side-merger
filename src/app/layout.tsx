@@ -21,8 +21,8 @@ export const viewport: Viewport = {
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 export const metadata: Metadata = {
-  title: "PDF Side-by-Side Merger - Merge PDFs Horizontally Online",
-  description: "Free online tool to merge two PDF files side-by-side. Place corresponding pages horizontally for document comparison, dual-language materials, and more. 100% browser-based, secure, and private.",
+  title: "Merge PDFs Side by Side Online | Free & Private PDF Tool",
+  description: "Merge two PDF files side by side directly in your browser. No uploads, no tracking, and 100% free. Ideal for document comparison and dual-language PDFs.",
   keywords: ["PDF merger", "side-by-side PDF", "merge PDFs", "PDF comparison", "dual language PDF", "online PDF tool"],
   authors: [{ name: "PDF Side-by-Side Merger" }],
   creator: "PDF Side-by-Side Merger",
@@ -35,8 +35,8 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "PDF Side-by-Side Merger - Merge PDFs Horizontally",
-    description: "Free online tool to merge two PDF files side-by-side. Secure, private, and browser-based.",
+    title: "Merge PDFs Side by Side Online | Free & Private PDF Tool",
+    description: "Merge two PDF files side by side directly in your browser. No uploads, no tracking, and 100% free.",
     url: siteUrl,
     siteName: "PDF Side-by-Side Merger",
     locale: "en_US",
@@ -44,8 +44,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "PDF Side-by-Side Merger",
-    description: "Free online tool to merge two PDF files side-by-side",
+    title: "Merge PDFs Side by Side Online | Free & Private",
+    description: "Merge PDFs side by side in your browser. No uploads, 100% free and private.",
   },
   robots: {
     index: true,
@@ -65,11 +65,44 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PDF Side-by-Side Merger",
+    "description": "Free online tool to merge two PDF files side by side directly in your browser. No uploads, no tracking, 100% private and secure.",
+    "url": siteUrl,
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "Privacy-first: All processing happens in your browser",
+      "No file uploads to servers",
+      "100% free with no limits or watermarks",
+      "Side-by-side page merging",
+      "Multiple page size handling modes",
+      "Support for PDFs with different page counts"
+    ],
+    "browserRequirements": "Requires JavaScript. Works on Chrome 90+, Firefox 88+, Safari 14+, Edge 90+",
+    "softwareVersion": "1.0.0",
+    "author": {
+      "@type": "Organization",
+      "name": "PDF Side-by-Side Merger Contributors"
+    }
+  };
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
       </head>
       <body
         className={`${inter.variable} font-sans antialiased`}
