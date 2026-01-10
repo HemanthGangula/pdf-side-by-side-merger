@@ -1,7 +1,31 @@
 {
-  "name": "join-pdf-side-side",
-  "version": "0.1.0",
-  "private": true,
+  "name": "pdf-side-by-side-merger",
+  "version": "1.0.0",
+  "description": "A modern web application to merge two PDF files side-by-side. Built with Next.js, TypeScript, and Tailwind CSS.",
+  "keywords": [
+    "pdf",
+    "pdf-merger",
+    "side-by-side",
+    "nextjs",
+    "typescript",
+    "pdf-lib",
+    "react",
+    "tailwindcss"
+  ],
+  "author": "PDF Side-by-Side Merger Contributors",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/pdf-side-by-side-merger.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/pdf-side-by-side-merger/issues"
+  },
+  "homepage": "https://github.com/yourusername/pdf-side-by-side-merger#readme",
+  "engines": {
+    "node": ">=20.9.0",
+    "npm": ">=10.0.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -10,8 +34,10 @@
   },
   "dependencies": {
     "next": "16.1.1",
+    "pdf-lib": "^1.17.1",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "react-dropzone": "^14.3.8"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
