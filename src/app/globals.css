@@ -14,10 +14,6 @@
   --accent-purple: #8b5cf6;
   --accent-pink: #ec4899;
   
-  /* Glassmorphism */
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.18);
-  
   /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
@@ -37,9 +33,6 @@
   :root {
     --background: #0a0a0a;
     --foreground: #f8fafc;
-    
-    --glass-bg: rgba(15, 23, 42, 0.7);
-    --glass-border: rgba(148, 163, 184, 0.18);
   }
 }
 
@@ -90,6 +83,15 @@ body {
   }
 }
 
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 @keyframes shimmer {
   0% {
     background-position: -1000px 0;
@@ -99,14 +101,6 @@ body {
   }
 }
 
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
 
 @keyframes gradientShift {
   0%, 100% {
@@ -139,49 +133,34 @@ body {
   animation: scaleIn 0.4s ease-out forwards;
 }
 
-.animate-float {
-  animation: float 3s ease-in-out infinite;
+.animate-fadeOut {
+  animation: fadeOut 0.3s ease-out forwards;
 }
+
 
 .animate-gradientShift {
   animation: gradientShift 6s ease infinite;
   background-size: 200% 200%;
 }
 
-.glass-effect {
-  background: var(--glass-bg);
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
-  border: 1px solid var(--glass-border);
+/* Simple card style */
+.card {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  .card {
+    background: #1a1a1a;
+    border-color: rgba(255, 255, 255, 0.1);
+  }
 }
 
 .shadow-premium {
   box-shadow: var(--shadow-premium);
 }
 
-.gradient-primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-.gradient-accent {
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-}
-
-.gradient-blue-purple {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-}
-
-.gradient-animated {
-  background: linear-gradient(
-    -45deg,
-    #667eea,
-    #764ba2,
-    #f093fb,
-    #4facfe
-  );
-  background-size: 400% 400%;
-  animation: gradientShift 15s ease infinite;
-}
 
 /* Smooth Transitions */
 .transition-smooth {

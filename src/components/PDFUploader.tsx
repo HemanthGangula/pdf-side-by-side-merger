@@ -44,20 +44,18 @@ export default function PDFUploader({ onFileSelect, label, currentFile, onClear 
         <div
           {...getRootProps()}
           className={`
-            glass-effect relative overflow-hidden rounded-2xl p-6 sm:p-8 lg:p-10
+            relative overflow-hidden rounded-lg p-6 sm:p-8 lg:p-10
             text-center cursor-pointer group
-            transition-all duration-300 ease-out
+            transition-all duration-200 ease-out
             border-2 border-dashed
+            bg-white dark:bg-gray-800/50
             ${isDragActive 
-              ? 'border-blue-500 bg-blue-50/50 dark:bg-blue-900/20 shadow-xl scale-[1.02]' 
-              : 'border-gray-300 dark:border-gray-600 hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-lg hover:scale-[1.01]'
+              ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20 shadow-md' 
+              : 'border-gray-300 dark:border-gray-600 hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-sm'
             }
           `}
         >
           <input {...getInputProps()} aria-label={`Upload ${label}`} />
-          
-          {/* Background decoration */}
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 dark:from-blue-500/10 dark:to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           
           <div className="relative flex flex-col items-center gap-3 sm:gap-4">
             {/* Upload Icon */}
@@ -66,15 +64,15 @@ export default function PDFUploader({ onFileSelect, label, currentFile, onClear 
               flex items-center justify-center
               transition-all duration-300
               ${isDragActive 
-                ? 'bg-gradient-to-br from-blue-500 to-purple-600 scale-110' 
-                : 'bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900/50 dark:to-purple-900/50 group-hover:scale-110'
+                ? 'bg-blue-500 text-white' 
+                : 'bg-gray-100 dark:bg-gray-700 text-blue-600 dark:text-blue-400'
               }
             `}>
               <svg
-                className={`w-8 h-8 sm:w-10 sm:h-10 transition-colors duration-300 ${
+                className={`w-8 h-8 sm:w-10 sm:h-10 transition-colors duration-200 ${
                   isDragActive 
                     ? 'text-white' 
-                    : 'text-blue-600 dark:text-blue-400 group-hover:text-purple-600 dark:group-hover:text-purple-400'
+                    : 'text-blue-600 dark:text-blue-400'
                 }`}
                 fill="none"
                 stroke="currentColor"
@@ -107,7 +105,7 @@ export default function PDFUploader({ onFileSelect, label, currentFile, onClear 
                 <p className="text-sm text-gray-600 dark:text-gray-400">
                   or click to browse files
                 </p>
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
                   <svg className="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clipRule="evenodd" />
                   </svg>
@@ -120,11 +118,11 @@ export default function PDFUploader({ onFileSelect, label, currentFile, onClear 
           </div>
         </div>
       ) : (
-        <div className="glass-effect rounded-2xl p-4 sm:p-5 lg:p-6 shadow-lg border border-green-200 dark:border-green-700 bg-gradient-to-r from-green-50/50 to-emerald-50/50 dark:from-green-900/20 dark:to-emerald-900/20 animate-scaleIn">
+        <div className="rounded-lg p-4 sm:p-5 lg:p-6 shadow-sm border border-green-200 dark:border-green-700 bg-green-50 dark:bg-green-900/20">
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-3 sm:gap-4 min-w-0 flex-1">
               {/* PDF Icon */}
-              <div className="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center shadow-md">
+              <div className="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-lg bg-red-500 flex items-center justify-center">
                 <svg className="w-6 h-6 sm:w-7 sm:h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clipRule="evenodd" />
                 </svg>

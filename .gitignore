@@ -63,5 +63,5 @@ next-env.d.ts
 Thumbs.db
 
 # Keep important config files
-!.nvmrc
-!.node-version
+.nvmrc
+.node-version

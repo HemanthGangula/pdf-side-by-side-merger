@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, Suspense, lazy } from 'react';
+import Link from 'next/link';
 import { getPDFInfo, mergePDFsSideBySide, downloadPDF, PageSizeMode, PDFInfo } from '@/lib/pdf-utils';
 import { readFileAsArrayBuffer } from '@/lib/file-utils';
 
@@ -9,6 +10,7 @@ const PDFUploader = lazy(() => import('@/components/PDFUploader'));
 const PDFPreview = lazy(() => import('@/components/PDFPreview'));
 const MergeOptions = lazy(() => import('@/components/MergeOptions'));
 const MergeButton = lazy(() => import('@/components/MergeButton'));
+const MergeDiagram = lazy(() => import('@/components/MergeDiagram'));
 
 // Loading skeleton component
 function ComponentSkeleton() {
@@ -33,6 +35,7 @@ export default function Home() {
     try {
       setPdf1File(file);
       setError(null);
+      setSuccessMessage(null);
       const arrayBuffer = await readFileAsArrayBuffer(file);
       const info = await getPDFInfo(arrayBuffer, file.name, file.size);
       setPdf1Info(info);
@@ -47,6 +50,7 @@ export default function Home() {
     try {
       setPdf2File(file);
       setError(null);
+      setSuccessMessage(null);
       const arrayBuffer = await readFileAsArrayBuffer(file);
       const info = await getPDFInfo(arrayBuffer, file.name, file.size);
       setPdf2Info(info);
@@ -69,6 +73,20 @@ export default function Home() {
     setPdf2Info(null);
     setError(null);
     setSuccessMessage(null);
+  };
+
+  const handleReset = () => {
+    setPdf1File(null);
+    setPdf2File(null);
+    setPdf1Info(null);
+    setPdf2Info(null);
+    setPageSizeMode('scale');
+    setError(null);
+    setSuccessMessage(null);
+    setIsProcessing(false);
+    
+    // Scroll to top to show upload areas
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleMerge = async () => {
@@ -94,7 +112,10 @@ export default function Home() {
       const outputFilename = `merged-${pdf1File.name.replace('.pdf', '')}-${pdf2File.name.replace('.pdf', '')}.pdf`;
       downloadPDF(mergedPdfBytes, outputFilename);
 
-      setSuccessMessage('PDFs merged successfully! Download should start automatically.');
+      setSuccessMessage('PDFs merged successfully! Download started.');
+      
+      // Auto-scroll to top to show success message and "Merge Another" button
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (err) {
       console.error('Merge error:', err);
       setError('Failed to merge PDFs. Please check that both files are valid PDFs and try again.');
@@ -106,43 +127,22 @@ export default function Home() {
   const canMerge = pdf1File && pdf2File && !isProcessing;
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      {/* Animated Background */}
-      <div className="fixed inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-purple-900/20 dark:to-blue-900/20"></div>
-        <div className="absolute top-0 -left-4 w-72 h-72 bg-purple-300 dark:bg-purple-500 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-xl opacity-30 dark:opacity-20 animate-float"></div>
-        <div className="absolute top-0 -right-4 w-72 h-72 bg-blue-300 dark:bg-blue-500 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-xl opacity-30 dark:opacity-20 animate-float" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-300 dark:bg-pink-500 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-xl opacity-30 dark:opacity-20 animate-float" style={{ animationDelay: '4s' }}></div>
-      </div>
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16 max-w-7xl relative">
-        {/* Premium Header */}
-        <header className="text-center mb-12 sm:mb-16 lg:mb-20 animate-fadeIn">
-          <div className="inline-block mb-4 px-4 py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 dark:from-blue-500/20 dark:to-purple-500/20 rounded-full border border-blue-200/50 dark:border-blue-500/30">
-            <span className="text-sm font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400">
-              100% Free • Privacy First • No Uploads
-            </span>
-          </div>
-          
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 leading-tight">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400">
-              Merge PDFs
-            </span>
-            <br />
-            Side-by-Side
+    <div className="min-h-screen bg-white dark:bg-gray-900">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16 max-w-5xl">
+        {/* Simple Header */}
+        <header className="text-center mb-8 sm:mb-12">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
+            Merge PDFs Side by Side
           </h1>
-          
-          <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Perfect for comparing documents, creating dual-language materials,
-            <br className="hidden sm:block" />
-            or combining related content horizontally
+          <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            Combine two PDF files horizontally. Free, private, and browser-based.
           </p>
         </header>
 
         {/* Toast Notifications */}
         {error && (
-          <div className="mb-6 sm:mb-8 animate-slideUp" role="alert" aria-live="assertive">
-            <div className="glass-effect max-w-2xl mx-auto rounded-2xl p-4 sm:p-5 border-l-4 border-red-500 shadow-lg">
+          <div className="mb-6 sm:mb-8" role="alert" aria-live="assertive">
+            <div className="max-w-2xl mx-auto rounded-lg p-4 sm:p-5 border-l-4 border-red-500 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 shadow-sm">
               <div className="flex items-start gap-3">
                 <div className="flex-shrink-0 w-6 h-6 sm:w-7 sm:h-7 bg-red-500 rounded-full flex items-center justify-center" aria-hidden="true">
                   <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -164,11 +164,11 @@ export default function Home() {
         )}
 
         {successMessage && (
-          <div className="mb-6 sm:mb-8 animate-slideUp" role="status" aria-live="polite">
-            <div className="glass-effect max-w-2xl mx-auto rounded-2xl p-4 sm:p-5 border-l-4 border-green-500 shadow-lg">
-              <div className="flex items-start gap-3">
-                <div className="flex-shrink-0 w-6 h-6 sm:w-7 sm:h-7 bg-green-500 rounded-full flex items-center justify-center" aria-hidden="true">
-                  <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+          <div className="mb-6 sm:mb-8" role="status" aria-live="polite">
+            <div className="max-w-2xl mx-auto rounded-lg p-4 sm:p-5 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/50 shadow-sm">
+              <div className="flex items-start gap-3 mb-4">
+                <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 text-green-600 dark:text-green-400 mt-0.5" aria-hidden="true">
+                  <svg fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                 </div>
@@ -182,12 +182,25 @@ export default function Home() {
                   </svg>
                 </button>
               </div>
+              {/* Merge Another Button */}
+              <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+                <button
+                  onClick={handleReset}
+                  className="w-full sm:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200 active:scale-[0.98] flex items-center justify-center gap-2"
+                  aria-label="Start a new merge"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                  </svg>
+                  <span>Merge Another PDF</span>
+                </button>
+              </div>
             </div>
           </div>
         )}
 
         {/* File Upload Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 mb-6 sm:mb-8 animate-slideUp" style={{ animationDelay: '0.1s' }}>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 mb-6 sm:mb-8">
           <Suspense fallback={<ComponentSkeleton />}>
             <PDFUploader
               label="First PDF File"
@@ -208,7 +221,7 @@ export default function Home() {
 
         {/* Preview Section */}
         {(pdf1Info || pdf2Info) && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 mb-6 sm:mb-8 animate-scaleIn">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 mb-6 sm:mb-8">
             <Suspense fallback={<ComponentSkeleton />}>
               {pdf1Info && <PDFPreview pdfInfo={pdf1Info} label="First PDF Information" />}
             </Suspense>
@@ -220,7 +233,7 @@ export default function Home() {
 
         {/* Merge Options */}
         {pdf1File && pdf2File && (
-          <div className="mb-6 sm:mb-8 animate-scaleIn" style={{ animationDelay: '0.2s' }}>
+          <div className="mb-6 sm:mb-8">
             <Suspense fallback={<ComponentSkeleton />}>
               <MergeOptions
                 pageSizeMode={pageSizeMode}
@@ -231,7 +244,7 @@ export default function Home() {
         )}
 
         {/* Merge Button */}
-        <div className="mb-8 sm:mb-12 lg:mb-16 max-w-2xl mx-auto animate-scaleIn" style={{ animationDelay: '0.3s' }}>
+        <div className="mb-8 sm:mb-12 max-w-2xl mx-auto">
           <Suspense fallback={<ComponentSkeleton />}>
             <MergeButton
               onMerge={handleMerge}
@@ -241,8 +254,13 @@ export default function Home() {
           </Suspense>
         </div>
 
+        {/* Visual Diagram */}
+        <Suspense fallback={<ComponentSkeleton />}>
+          <MergeDiagram />
+        </Suspense>
+
         {/* Features Section */}
-        <section className="mb-12 sm:mb-16 animate-slideUp" style={{ animationDelay: '0.4s' }}>
+        <section className="mb-12 sm:mb-16">
           <h2 className="sr-only">Key Features</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {[
@@ -251,7 +269,7 @@ export default function Home() {
               { icon: '🎯', title: 'Easy to Use', desc: 'Simple drag & drop interface' },
               { icon: '💯', title: 'Always Free', desc: 'No limits, no watermarks' },
             ].map((feature, idx) => (
-              <div key={idx} className="glass-effect rounded-2xl p-6 text-center transition-all duration-300 hover:shadow-xl hover:scale-105 contain-paint">
+              <div key={idx} className="rounded-lg p-6 text-center border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-800/50 hover:shadow-md transition-shadow">
                 <div className="text-4xl mb-3">{feature.icon}</div>
                 <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{feature.title}</h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400">{feature.desc}</p>
@@ -260,109 +278,18 @@ export default function Home() {
           </div>
         </section>
 
-        {/* How it Works */}
-        <section className="glass-effect rounded-3xl p-6 sm:p-8 lg:p-10 mb-12 sm:mb-16 max-w-4xl mx-auto shadow-premium animate-fadeIn" style={{ animationDelay: '0.5s' }}>
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-6 sm:mb-8 text-center">
-            How it Works
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
-            {[
-              { step: '1', title: 'Upload Files', desc: 'Drop or select two PDF files' },
-              { step: '2', title: 'Choose Options', desc: 'Select page size handling mode' },
-              { step: '3', title: 'Merge', desc: 'Click to combine side-by-side' },
-              { step: '4', title: 'Download', desc: 'Get your merged PDF instantly' },
-            ].map((item, idx) => (
-              <div key={idx} className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-xl flex items-center justify-center text-lg sm:text-xl font-bold shadow-lg">
-                  {item.step}
-                </div>
-                <div>
-                  <h3 className="text-base sm:text-lg font-bold text-gray-900 dark:text-white mb-1">{item.title}</h3>
-                  <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">{item.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* SEO Content Section */}
-        <article className="max-w-4xl mx-auto mb-12 sm:mb-16 space-y-8 sm:space-y-10">
-          <section>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              What Is a Side-by-Side PDF Merger?
-            </h2>
-            <div className="space-y-4 text-base sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-              <p>
-                A side-by-side PDF merger is a specialized tool that combines two PDF documents by placing their corresponding pages horizontally next to each other. Unlike traditional PDF mergers that stack pages vertically (one document after another), this tool creates a new PDF where page 1 of the first document appears alongside page 1 of the second document, page 2 with page 2, and so on.
-              </p>
-              <p>
-                This unique approach to <strong>merging PDFs side by side</strong> is particularly valuable for document comparison, translation work, and educational materials. Instead of switching between two separate PDFs, you can view both documents simultaneously on a single page, making it easier to spot differences, verify translations, or study parallel content.
-              </p>
-            </div>
-          </section>
-
-          <section>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              Common Use Cases
-            </h2>
-            <div className="space-y-4 text-base sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-              <p>
-                Our side-by-side PDF tool serves a variety of professional and personal needs:
-              </p>
-              <ul className="list-disc list-inside space-y-2 ml-4">
-                <li><strong>Document Comparison:</strong> Compare two PDF files to identify changes between contract versions, legal documents, or revised manuscripts.</li>
-                <li><strong>Translation Review:</strong> Place original and translated documents side by side for accurate translation verification and quality assurance.</li>
-                <li><strong>Dual-Language Materials:</strong> Create bilingual educational resources, instruction manuals, or presentations with parallel language support.</li>
-                <li><strong>Before and After Analysis:</strong> Display original and edited versions of reports, proposals, or design documents for easy reference.</li>
-                <li><strong>Academic Research:</strong> Compare research papers, study notes, or annotated versions of scholarly articles.</li>
-              </ul>
-            </div>
-          </section>
-
-          <section>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              Privacy and Security
-            </h2>
-            <div className="space-y-4 text-base sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-              <p>
-                Your document security is our top priority. When you <strong>merge PDFs side by side</strong> using our tool, all processing happens entirely within your web browser. This means your PDF files never leave your device and are never uploaded to our servers or any third-party services.
-              </p>
-              <p>
-                We don't store, track, or have access to your documents. No account creation is required, no cookies are used for tracking, and no data is collected. This browser-based approach ensures complete privacy, making it safe to work with sensitive documents like legal contracts, financial reports, or confidential business materials.
-              </p>
-            </div>
-          </section>
-
-          <section>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              Why Use a Browser-Based Tool?
-            </h2>
-            <div className="space-y-4 text-base sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-              <p>
-                Browser-based PDF tools offer significant advantages over traditional desktop software or server-based services:
-              </p>
-              <ul className="list-disc list-inside space-y-2 ml-4">
-                <li><strong>No Installation Required:</strong> Works instantly in any modern web browser without downloading or installing software.</li>
-                <li><strong>Cross-Platform Compatibility:</strong> Use on Windows, Mac, Linux, or any device with a web browser.</li>
-                <li><strong>Always Up-to-Date:</strong> Access the latest features automatically without manual updates.</li>
-                <li><strong>Complete Privacy:</strong> Your files stay on your device, eliminating security concerns about cloud storage.</li>
-                <li><strong>Free and Unlimited:</strong> No subscription fees, file size limits, or usage restrictions.</li>
-              </ul>
-              <p>
-                Our tool leverages modern web technologies to provide fast, efficient PDF processing entirely client-side, giving you professional-grade results while maintaining the highest standards of privacy and convenience.
-              </p>
-            </div>
-          </section>
-        </article>
-
         {/* Footer */}
-        <footer className="text-center text-sm text-gray-500 dark:text-gray-400 animate-fadeIn" style={{ animationDelay: '0.6s' }}>
+        <footer className="text-center text-sm text-gray-500 dark:text-gray-400 pt-8 border-t border-gray-200 dark:border-gray-800">
           <p className="mb-2">All processing happens in your browser. Your files are never uploaded to any server.</p>
           <p className="text-xs">
-            © 2026 PDF Side-by-Side Merger. Open source and privacy-focused. 
-            <a href="https://github.com/HemanthGangula/pdf-side-by-side-merger" className="ml-2 hover:text-gray-700 dark:hover:text-gray-300 underline" target="_blank" rel="noopener noreferrer">
-              View on GitHub
+            © 2026 PDF Side-by-Side Merger. Open source and privacy-focused.{' '}
+            <a href="https://github.com/HemanthGangula/pdf-side-by-side-merger" className="hover:text-gray-700 dark:hover:text-gray-300 underline" target="_blank" rel="noopener noreferrer">
+              GitHub
             </a>
+            {' · '}
+            <Link href="/about" className="hover:text-gray-700 dark:hover:text-gray-300 underline">
+              About
+            </Link>
           </p>
         </footer>
       </div>
