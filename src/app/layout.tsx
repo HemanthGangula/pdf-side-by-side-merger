@@ -28,6 +28,9 @@ export const metadata: Metadata = {
   creator: "PDF Side-by-Side Merger",
   publisher: "PDF Side-by-Side Merger",
   metadataBase: new URL(siteUrl),
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  },
   alternates: {
     canonical: "/",
   },
