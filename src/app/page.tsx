@@ -360,7 +360,7 @@ export default function Home() {
           <p className="mb-2">All processing happens in your browser. Your files are never uploaded to any server.</p>
           <p className="text-xs">
             © 2026 PDF Side-by-Side Merger. Open source and privacy-focused. 
-            <a href="https://github.com/yourusername/pdf-side-by-side-merger" className="ml-2 hover:text-gray-700 dark:hover:text-gray-300 underline" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/HemanthGangula/pdf-side-by-side-merger" className="ml-2 hover:text-gray-700 dark:hover:text-gray-300 underline" target="_blank" rel="noopener noreferrer">
               View on GitHub
             </a>
           </p>
