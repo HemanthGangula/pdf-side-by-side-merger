@@ -16,12 +16,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yourusername/pdf-side-by-side-merger.git"
+    "url": "git+https://github.com/HemanthGangula/pdf-side-by-side-merger.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/pdf-side-by-side-merger/issues"
+    "url": "https://github.com/HemanthGangula/pdf-side-by-side-merger/issues"
   },
-  "homepage": "https://github.com/yourusername/pdf-side-by-side-merger#readme",
+  "homepage": "https://pdf-side-by-side-merger.vercel.app",
   "engines": {
     "node": ">=20.9.0",
     "npm": ">=10.0.0"

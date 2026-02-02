@@ -2,11 +2,26 @@
 
 A modern web application that merges two PDF files by placing corresponding pages side-by-side. Built with Next.js, TypeScript, and Tailwind CSS.
 
+## 🌐 Try It Now
+
+**[Use the tool online →](https://pdf-side-by-side-merger.vercel.app)**
+
+Free, private, and browser-based. No uploads required.
+
+## Why Use This Tool?
+
+- **🔒 Privacy-First**: All processing happens in your browser—no file uploads to servers. Your PDFs never leave your device.
+- **🌐 Browser-Based**: No installation required. Works instantly in any modern web browser on any device.
+- **💯 Free and Unlimited**: No subscription fees, file size limits, or usage restrictions. Completely free forever.
+- **📄 Perfect for Comparison**: Ideal for comparing contract versions, reviewing translations, analyzing document changes, and creating dual-language materials.
+- **⚡ Lightning Fast**: Client-side processing means instant results with no server delays.
+- **🎯 Easy to Use**: Simple drag-and-drop interface. No technical knowledge required.
+
 ## Features
 
 - 🔒 **100% Private** - All processing happens in your browser, no server uploads
 - ⚡ **Fast & Efficient** - Client-side PDF manipulation with optimized performance
-- 🎨 **Modern UI** - Premium design with glassmorphism effects and smooth animations
+- 🎨 **Modern UI** - Clean, minimalist design with smooth animations
 - 📱 **Fully Responsive** - Optimized for mobile, tablet, and desktop
 - 🌙 **Dark Mode** - Full dark mode support
 - ♿ **Accessible** - WCAG 2.1 AA compliant
@@ -40,7 +55,7 @@ A modern web application that merges two PDF files by placing corresponding page
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/yourusername/pdf-side-by-side-merger.git
+git clone https://github.com/HemanthGangula/pdf-side-by-side-merger.git
 cd pdf-side-by-side-merger
 ```
 
@@ -165,7 +180,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-MIT License - Open source and free to use
+MIT License - Free to use
 
 ## Privacy
 
@@ -175,4 +190,10 @@ Your files are processed entirely in your browser. No data is collected, stored,
 
 If you find this project helpful, please give it a ⭐️ on GitHub!
 
-For bugs and feature requests, please [open an issue](https://github.com/yourusername/pdf-side-by-side-merger/issues).
+For bugs and feature requests, please [open an issue](https://github.com/HemanthGangula/pdf-side-by-side-merger/issues).
+
+## Live Site
+
+**[Try the tool online →](https://pdf-side-by-side-merger.vercel.app)**
+
+Compare PDFs side by side, merge documents horizontally, and process files entirely in your browser—no uploads, no tracking, completely free.

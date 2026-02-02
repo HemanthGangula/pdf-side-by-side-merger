@@ -259,6 +259,16 @@ export default function Home() {
           <MergeDiagram />
         </Suspense>
 
+        {/* Natural Link to Comparison Page */}
+        <div className="text-center mb-8 sm:mb-12">
+          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
+            Need to compare PDFs page by page?{' '}
+            <Link href="/compare-pdfs-side-by-side" className="text-blue-600 dark:text-blue-400 hover:underline font-medium">
+              Learn how →
+            </Link>
+          </p>
+        </div>
+
         {/* Features Section */}
         <section className="mb-12 sm:mb-16">
           <h2 className="sr-only">Key Features</h2>
@@ -282,10 +292,14 @@ export default function Home() {
         <footer className="text-center text-sm text-gray-500 dark:text-gray-400 pt-8 border-t border-gray-200 dark:border-gray-800">
           <p className="mb-2">All processing happens in your browser. Your files are never uploaded to any server.</p>
           <p className="text-xs">
-            © 2026 PDF Side-by-Side Merger. Open source and privacy-focused.{' '}
+            © 2026 PDF Side-by-Side Merger. Privacy-focused.{' '}
             <a href="https://github.com/HemanthGangula/pdf-side-by-side-merger" className="hover:text-gray-700 dark:hover:text-gray-300 underline" target="_blank" rel="noopener noreferrer">
               GitHub
             </a>
+            {' · '}
+            <Link href="/compare-pdfs-side-by-side" className="hover:text-gray-700 dark:hover:text-gray-300 underline">
+              Compare PDFs
+            </Link>
             {' · '}
             <Link href="/about" className="hover:text-gray-700 dark:hover:text-gray-300 underline">
               About

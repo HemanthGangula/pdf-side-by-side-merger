@@ -61,7 +61,7 @@ export default function AboutPage() {
                 A side-by-side PDF merger is a specialized tool that combines two PDF documents by placing their corresponding pages horizontally next to each other. Unlike traditional PDF mergers that stack pages vertically (one document after another), this tool creates a new PDF where page 1 of the first document appears alongside page 1 of the second document, page 2 with page 2, and so on.
               </p>
               <p>
-                This unique approach to <strong>merging PDFs side by side</strong> is particularly valuable for document comparison, translation work, and educational materials. Instead of switching between two separate PDFs, you can view both documents simultaneously on a single page, making it easier to spot differences, verify translations, or study parallel content.
+                This unique approach to <strong>merging PDFs side by side</strong> is particularly valuable for <Link href="/compare-pdfs-side-by-side" className="text-blue-600 dark:text-blue-400 hover:underline">document comparison</Link>, translation work, and educational materials. Instead of switching between two separate PDFs, you can view both documents simultaneously on a single page, making it easier to spot differences, verify translations, or study parallel content.
               </p>
             </div>
             
@@ -78,7 +78,7 @@ export default function AboutPage() {
               Common Use Cases
             </h2>
             <p className="text-base sm:text-lg text-gray-700 dark:text-gray-300 mb-6">
-              Our side-by-side PDF tool serves a variety of professional and personal needs:
+              Our side-by-side PDF merger serves a variety of professional and personal needs:
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               {/* Document Comparison */}
@@ -91,7 +91,7 @@ export default function AboutPage() {
                   </div>
                   <div>
                     <h3 className="font-bold text-gray-900 dark:text-white mb-1">Document Comparison</h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">Compare two PDF files to identify changes between contract versions, legal documents, or revised manuscripts.</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Compare two PDF files to identify changes between contract versions, legal documents, or revised manuscripts. <Link href="/compare-pdfs-side-by-side" className="text-blue-600 dark:text-blue-400 hover:underline">See detailed comparison guide</Link>.</p>
                   </div>
                 </div>
               </div>
