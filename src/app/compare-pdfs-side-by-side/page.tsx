@@ -1,12 +1,94 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Compare PDFs Side by Side Online | Free, No Uploads',
-  description: 'Compare two PDF files side by side without uploading. Browser-based, private, and free. Perfect for document comparison and translation review.',
+  title: 'Compare PDFs Side by Side Free | No Upload Required',
+  description: 'Compare two PDF files side by side without uploading. 100% browser-based, private, and free. Perfect for document comparison and translation review.',
 };
 
+const faqData = [
+  {
+    question: "Is this PDF comparison tool completely free?",
+    answer: "Yes, it's 100% free with no limits, no watermarks, and no hidden fees. You can compare as many PDFs as you want without any restrictions."
+  },
+  {
+    question: "Are my PDF files uploaded to any server?",
+    answer: "No. All processing happens directly in your browser using JavaScript. Your files never leave your device, ensuring complete privacy for sensitive documents."
+  },
+  {
+    question: "Can I compare PDFs with different page sizes?",
+    answer: "Yes. The tool offers multiple options: scale pages to fit, stretch to fill, or use the larger page size. It automatically handles PDFs with different dimensions."
+  },
+  {
+    question: "Does this tool work offline?",
+    answer: "Once the page is loaded, the PDF processing works entirely in your browser. However, you need an internet connection to initially load the page."
+  },
+  {
+    question: "What browsers are supported?",
+    answer: "The tool works on all modern browsers including Chrome 90+, Firefox 88+, Safari 14+, and Edge 90+. It also works on mobile browsers."
+  }
+];
+
+const howToSteps = [
+  {
+    name: "Select Your PDFs",
+    text: "Choose two PDF files you want to compare. Drag and drop or click to browse—both methods work seamlessly.",
+    url: "https://pdf-side-by-side-merger.vercel.app/#step1"
+  },
+  {
+    name: "Choose Merge Options",
+    text: "Select how to handle page sizes: scale to fit, stretch to fill, or use larger size. The tool automatically pairs corresponding pages.",
+    url: "https://pdf-side-by-side-merger.vercel.app/#step2"
+  },
+  {
+    name: "Download and Compare",
+    text: "Click merge and download your combined PDF. Each page shows both documents side by side, making comparison effortless.",
+    url: "https://pdf-side-by-side-merger.vercel.app/#step3"
+  }
+];
+
 export default function ComparePDFsPage() {
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqData.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  };
+
+  const howToSchema = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to Compare PDFs Side by Side",
+    "description": "Learn how to compare two PDF documents side by side using our free browser-based tool.",
+    "totalTime": "PT2M",
+    "tool": {
+      "@type": "HowToTool",
+      "name": "PDF Side-by-Side Merger"
+    },
+    "step": howToSteps.map((step, index) => ({
+      "@type": "HowToStep",
+      "position": index + 1,
+      "name": step.name,
+      "text": step.text,
+      "url": step.url
+    }))
+  };
+
   return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+      />
     <div className="min-h-screen bg-white dark:bg-gray-900">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 max-w-4xl">
         {/* Header */}
@@ -189,6 +271,31 @@ export default function ComparePDFsPage() {
               </Link>
             </div>
           </section>
+
+          {/* FAQ Section */}
+          <section>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-6">
+              Frequently Asked Questions
+            </h2>
+            <div className="space-y-4">
+              {faqData.map((faq, index) => (
+                <details
+                  key={index}
+                  className="group rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-800/50"
+                >
+                  <summary className="flex cursor-pointer items-center justify-between p-4 font-medium text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg">
+                    {faq.question}
+                    <svg className="w-5 h-5 text-gray-500 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </summary>
+                  <p className="px-4 pb-4 text-gray-600 dark:text-gray-400">
+                    {faq.answer}
+                  </p>
+                </details>
+              ))}
+            </div>
+          </section>
         </article>
 
         {/* Footer */}
@@ -217,6 +324,7 @@ export default function ComparePDFsPage() {
         </footer>
       </div>
     </div>
+    </>
   );
 }
 

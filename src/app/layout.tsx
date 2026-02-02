@@ -21,9 +21,9 @@ export const viewport: Viewport = {
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 export const metadata: Metadata = {
-  title: "Merge PDFs Side by Side (Free, Private, No Uploads)",
-  description: "Merge two PDFs side by side directly in your browser. No uploads, no tracking, and completely free. Ideal for comparing documents and dual-language PDFs.",
-  keywords: ["PDF merger", "side-by-side PDF", "merge PDFs", "PDF comparison", "dual language PDF", "online PDF tool"],
+  title: "Free PDF Side-by-Side Merger | 100% Private, No Uploads",
+  description: "Merge two PDFs side by side directly in your browser. No uploads, no tracking, 100% free. Perfect for comparing documents, translations, and dual-language PDFs.",
+  keywords: ["PDF merger", "side-by-side PDF", "merge PDFs", "PDF comparison", "dual language PDF", "online PDF tool", "compare PDFs", "free PDF tool"],
   authors: [{ name: "PDF Side-by-Side Merger" }],
   creator: "PDF Side-by-Side Merger",
   publisher: "PDF Side-by-Side Merger",
@@ -35,8 +35,8 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Merge PDFs Side by Side (Free, Private, No Uploads)",
-    description: "Merge two PDFs side by side directly in your browser. No uploads, no tracking, and completely free. Ideal for comparing documents and dual-language PDFs.",
+    title: "Free PDF Side-by-Side Merger | 100% Private, No Uploads",
+    description: "Merge two PDFs side by side directly in your browser. No uploads, no tracking, 100% free. Perfect for comparing documents, translations, and dual-language PDFs.",
     url: siteUrl,
     siteName: "PDF Side-by-Side Merger",
     locale: "en_US",
@@ -44,8 +44,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Merge PDFs Side by Side (Free, Private, No Uploads)",
-    description: "Merge two PDFs side by side directly in your browser. No uploads, no tracking, and completely free. Ideal for comparing documents and dual-language PDFs.",
+    title: "Free PDF Side-by-Side Merger | 100% Private, No Uploads",
+    description: "Merge two PDFs side by side directly in your browser. No uploads, no tracking, 100% free. Perfect for comparing documents, translations, and dual-language PDFs.",
   },
   robots: {
     index: true,
@@ -94,6 +94,31 @@ export default function RootLayout({
     }
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": siteUrl
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Compare PDFs",
+        "item": `${siteUrl}/compare-pdfs-side-by-side`
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "About",
+        "item": `${siteUrl}/about`
+      }
+    ]
+  };
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -102,6 +127,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
         />
       </head>
       <body

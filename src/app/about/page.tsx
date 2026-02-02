@@ -4,9 +4,28 @@ import { Suspense, lazy } from 'react';
 const MergeDiagram = lazy(() => import('@/components/MergeDiagram'));
 
 export const metadata = {
-  title: 'About - PDF Side-by-Side Merger',
+  title: 'About PDF Side-by-Side Merger | How It Works',
   description: 'Learn about side-by-side PDF merging, use cases, privacy features, and why browser-based tools are better for document processing.',
 };
+
+const faqData = [
+  {
+    question: "How does browser-based processing protect my privacy?",
+    answer: "All PDF processing happens directly in your web browser using JavaScript. Your files are never uploaded to any server, never transmitted over the internet, and never stored anywhere except your own device. This means even we cannot access your documents."
+  },
+  {
+    question: "Is my data stored anywhere?",
+    answer: "No. Your PDF files exist only in your browser's memory during processing. Once you close the page or refresh, all data is completely cleared. We don't use cookies for tracking, don't collect analytics on your documents, and have no database storing user files."
+  },
+  {
+    question: "Can I use this for confidential documents?",
+    answer: "Yes, absolutely. Because all processing is local to your device, this tool is safe for confidential contracts, legal documents, financial reports, medical records, or any sensitive materials. Your documents never leave your computer."
+  },
+  {
+    question: "What happens if I lose internet connection while merging?",
+    answer: "Once the page is fully loaded, the PDF merging process works entirely offline. Your internet connection is only needed to initially load the webpage. After that, you can disconnect and the tool will continue to work."
+  }
+];
 
 function DiagramSkeleton() {
   return (
@@ -15,7 +34,25 @@ function DiagramSkeleton() {
 }
 
 export default function AboutPage() {
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqData.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  };
+
   return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
     <div className="min-h-screen bg-white dark:bg-gray-900">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 max-w-4xl">
         {/* Header */}
@@ -295,6 +332,31 @@ export default function AboutPage() {
               Our tool leverages modern web technologies to provide fast, efficient PDF processing entirely client-side, giving you professional-grade results while maintaining the highest standards of privacy and convenience.
             </p>
           </section>
+
+          {/* FAQ Section */}
+          <section>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-6">
+              Frequently Asked Questions
+            </h2>
+            <div className="space-y-4">
+              {faqData.map((faq, index) => (
+                <details
+                  key={index}
+                  className="group rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-800/50"
+                >
+                  <summary className="flex cursor-pointer items-center justify-between p-4 font-medium text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg">
+                    {faq.question}
+                    <svg className="w-5 h-5 text-gray-500 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </summary>
+                  <p className="px-4 pb-4 text-gray-600 dark:text-gray-400">
+                    {faq.answer}
+                  </p>
+                </details>
+              ))}
+            </div>
+          </section>
         </article>
 
         {/* Footer */}
@@ -302,8 +364,8 @@ export default function AboutPage() {
           <div className="text-center">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Ready to Merge Your PDFs?</h3>
             <p className="text-gray-600 dark:text-gray-400 mb-6">Start merging PDFs side by side in seconds. No sign-up required.</p>
-            <Link 
-              href="/" 
+            <Link
+              href="/"
               className="inline-flex items-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200 text-lg"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -315,6 +377,7 @@ export default function AboutPage() {
         </footer>
       </div>
     </div>
+    </>
   );
 }
 
