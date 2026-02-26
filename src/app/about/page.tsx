@@ -1,11 +1,28 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Suspense, lazy } from 'react';
 
 const MergeDiagram = lazy(() => import('@/components/MergeDiagram'));
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'About PDF Side-by-Side Merger | How It Works',
   description: 'Learn about side-by-side PDF merging, use cases, privacy features, and why browser-based tools are better for document processing.',
+  alternates: {
+    canonical: '/about',
+  },
+  openGraph: {
+    title: 'About PDF Side-by-Side Merger | How It Works',
+    description: 'Learn about side-by-side PDF merging, use cases, privacy features, and why browser-based tools are better for document processing.',
+    url: '/about',
+    siteName: 'PDF Side-by-Side Merger',
+    locale: 'en_US',
+    type: 'article',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'About PDF Side-by-Side Merger | How It Works',
+    description: 'Learn about side-by-side PDF merging, use cases, privacy features, and why browser-based tools are better for document processing.',
+  },
 };
 
 const faqData = [

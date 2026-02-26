@@ -1,8 +1,25 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Compare PDFs Side by Side Free | No Upload Required',
   description: 'Compare two PDF files side by side without uploading. 100% browser-based, private, and free. Perfect for document comparison and translation review.',
+  alternates: {
+    canonical: '/compare-pdfs-side-by-side',
+  },
+  openGraph: {
+    title: 'Compare PDFs Side by Side Free | No Upload Required',
+    description: 'Compare two PDF files side by side without uploading. 100% browser-based, private, and free. Perfect for document comparison and translation review.',
+    url: '/compare-pdfs-side-by-side',
+    siteName: 'PDF Side-by-Side Merger',
+    locale: 'en_US',
+    type: 'article',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Compare PDFs Side by Side Free | No Upload Required',
+    description: 'Compare two PDF files side by side without uploading. 100% browser-based, private, and free. Perfect for document comparison and translation review.',
+  },
 };
 
 const faqData = [
