@@ -91,18 +91,51 @@ npm start
 ```
 src/
 ├── app/
-│   ├── page.tsx          # Main application page
-│   ├── layout.tsx        # Root layout with SEO
-│   └── globals.css       # Global styles & animations
+│   ├── page.tsx                           # Main application page
+│   ├── layout.tsx                         # Root layout with SEO metadata & structured data
+│   ├── sitemap.ts                         # Dynamic XML sitemap generation
+│   ├── icon.tsx                           # Dynamic favicon (32×32)
+│   ├── apple-icon.tsx                     # Dynamic Apple touch icon (180×180)
+│   ├── opengraph-image.tsx                # Dynamic Open Graph image (1200×630)
+│   ├── twitter-image.tsx                  # Dynamic Twitter card image (1200×630)
+│   ├── globals.css                        # Global styles & animations
+│   ├── about/
+│   │   └── page.tsx                       # About page with metadata & FAQ schema
+│   └── compare-pdfs-side-by-side/
+│       └── page.tsx                       # Comparison guide with FAQ & HowTo schemas
 ├── components/
-│   ├── PDFUploader.tsx   # File upload with drag-and-drop
-│   ├── PDFPreview.tsx    # PDF information display
-│   ├── MergeOptions.tsx  # Configuration options
-│   └── MergeButton.tsx   # Merge action button
+│   ├── PDFUploader.tsx                    # File upload with drag-and-drop
+│   ├── PDFPreview.tsx                     # PDF information display
+│   ├── MergeOptions.tsx                   # Configuration options
+│   └── MergeButton.tsx                    # Merge action button
 └── lib/
-    ├── pdf-utils.ts      # PDF merging logic
-    └── file-utils.ts     # File validation utilities
+    ├── pdf-utils.ts                       # PDF merging logic
+    └── file-utils.ts                      # File validation utilities
 ```
+
+## SEO
+
+The application is fully optimized for search engines:
+
+- **Metadata**: Title, description, keywords, authors, canonical URLs set for every page
+- **Open Graph**: Rich previews for social sharing (Facebook, LinkedIn) with a dynamically generated image
+- **Twitter Cards**: `summary_large_image` cards for better Twitter previews
+- **Structured Data (JSON-LD)**:
+  - `SoftwareApplication` schema on the root layout
+  - `BreadcrumbList` schema on the root layout
+  - `FAQPage` schema on the About and Compare pages
+  - `HowTo` schema on the Compare page
+- **Dynamic Icons**: Favicon and Apple touch icon generated via `next/og`
+- **Sitemap**: Auto-generated at `/sitemap.xml` via `src/app/sitemap.ts`
+- **robots.txt**: Located at `public/robots.txt`, allows all crawlers and links to the sitemap
+- **Google Search Console**: Verification token configured via the `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` environment variable
+
+### Environment Variables
+
+| Variable | Description |
+| --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | Canonical base URL (e.g. `https://pdf-side-by-side-merger.vercel.app`) |
+| `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` | Google Search Console verification token |
 
 ## Core Implementation
 
