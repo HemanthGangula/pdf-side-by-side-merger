@@ -6,6 +6,9 @@ const MergeDiagram = lazy(() => import('@/components/MergeDiagram'));
 export const metadata = {
   title: 'About PDF Side-by-Side Merger | How It Works',
   description: 'Learn about side-by-side PDF merging, use cases, privacy features, and why browser-based tools are better for document processing.',
+  alternates: {
+    canonical: '/about',
+  },
 };
 
 const faqData = [
@@ -47,11 +50,34 @@ export default function AboutPage() {
     }))
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://pdf-side-by-side-merger.vercel.app"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "About",
+        "item": "https://pdf-side-by-side-merger.vercel.app/about"
+      }
+    ]
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
     <div className="min-h-screen bg-white dark:bg-gray-900">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 max-w-4xl">

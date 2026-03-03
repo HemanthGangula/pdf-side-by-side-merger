@@ -18,7 +18,7 @@ export const viewport: Viewport = {
   ],
 };
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://pdf-side-by-side-merger.vercel.app";
 
 export const metadata: Metadata = {
   title: "Free PDF Side-by-Side Merger | 100% Private, No Uploads",
@@ -103,18 +103,6 @@ export default function RootLayout({
         "position": 1,
         "name": "Home",
         "item": siteUrl
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Compare PDFs",
-        "item": `${siteUrl}/compare-pdfs-side-by-side`
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": "About",
-        "item": `${siteUrl}/about`
       }
     ]
   };

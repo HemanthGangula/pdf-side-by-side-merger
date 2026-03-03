@@ -3,6 +3,9 @@ import Link from 'next/link';
 export const metadata = {
   title: 'Compare PDFs Side by Side Free | No Upload Required',
   description: 'Compare two PDF files side by side without uploading. 100% browser-based, private, and free. Perfect for document comparison and translation review.',
+  alternates: {
+    canonical: '/compare-pdfs-side-by-side',
+  },
 };
 
 const faqData = [
@@ -32,17 +35,14 @@ const howToSteps = [
   {
     name: "Select Your PDFs",
     text: "Choose two PDF files you want to compare. Drag and drop or click to browse—both methods work seamlessly.",
-    url: "https://pdf-side-by-side-merger.vercel.app/#step1"
   },
   {
     name: "Choose Merge Options",
     text: "Select how to handle page sizes: scale to fit, stretch to fill, or use larger size. The tool automatically pairs corresponding pages.",
-    url: "https://pdf-side-by-side-merger.vercel.app/#step2"
   },
   {
     name: "Download and Compare",
     text: "Click merge and download your combined PDF. Each page shows both documents side by side, making comparison effortless.",
-    url: "https://pdf-side-by-side-merger.vercel.app/#step3"
   }
 ];
 
@@ -75,8 +75,26 @@ export default function ComparePDFsPage() {
       "position": index + 1,
       "name": step.name,
       "text": step.text,
-      "url": step.url
     }))
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://pdf-side-by-side-merger.vercel.app"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Compare PDFs Side by Side",
+        "item": "https://pdf-side-by-side-merger.vercel.app/compare-pdfs-side-by-side"
+      }
+    ]
   };
 
   return (
@@ -88,6 +106,10 @@ export default function ComparePDFsPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
     <div className="min-h-screen bg-white dark:bg-gray-900">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 max-w-4xl">
