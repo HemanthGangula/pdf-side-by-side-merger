@@ -65,3 +65,11 @@ Thumbs.db
 # Keep important config files
 .nvmrc
 .node-version
+
+# OpenNext
+.open-next
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
