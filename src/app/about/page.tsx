@@ -6,24 +6,40 @@ const MergeDiagram = lazy(() => import('@/components/MergeDiagram'));
 export const metadata = {
   title: 'About PDF Side-by-Side Merger | How It Works',
   description: 'Learn about side-by-side PDF merging, use cases, privacy features, and why browser-based tools are better for document processing.',
+  alternates: {
+    canonical: '/about',
+  },
+  openGraph: {
+    title: 'About PDF Side-by-Side Merger | How It Works',
+    description: 'Learn about side-by-side PDF merging, use cases, privacy features, and why browser-based tools are better for document processing.',
+    url: '/about',
+    siteName: 'PDF Side-by-Side Merger',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'About PDF Side-by-Side Merger | How It Works',
+    description: 'Learn about side-by-side PDF merging, use cases, privacy features, and why browser-based tools are better for document processing.',
+  },
 };
 
 const faqData = [
   {
     question: "How does browser-based processing protect my privacy?",
-    answer: "All PDF processing happens directly in your web browser using JavaScript. Your files are never uploaded to any server, never transmitted over the internet, and never stored anywhere except your own device. This means even we cannot access your documents."
+    answer: "All PDF processing runs directly in your browser using JavaScript. Your files are never uploaded to a server, never sent over the internet, and never stored outside your own device. Nobody else can access your documents, including us."
   },
   {
     question: "Is my data stored anywhere?",
-    answer: "No. Your PDF files exist only in your browser's memory during processing. Once you close the page or refresh, all data is completely cleared. We don't use cookies for tracking, don't collect analytics on your documents, and have no database storing user files."
+    answer: "No. Your files only exist in your browser's memory while they're being processed. Once you close or refresh the page, everything is cleared. There are no tracking cookies, no document analytics, and no database of user files."
   },
   {
     question: "Can I use this for confidential documents?",
-    answer: "Yes, absolutely. Because all processing is local to your device, this tool is safe for confidential contracts, legal documents, financial reports, medical records, or any sensitive materials. Your documents never leave your computer."
+    answer: "Yes. Since all processing is local, this is fine to use with confidential contracts, legal documents, financial reports, medical records, or anything else sensitive. Nothing leaves your computer."
   },
   {
     question: "What happens if I lose internet connection while merging?",
-    answer: "Once the page is fully loaded, the PDF merging process works entirely offline. Your internet connection is only needed to initially load the webpage. After that, you can disconnect and the tool will continue to work."
+    answer: "Once the page has loaded, the tool works entirely offline. You only need an internet connection to load the page in the first place. After that, you can disconnect and it'll still work fine."
   }
 ];
 
@@ -33,7 +49,18 @@ function DiagramSkeleton() {
   );
 }
 
+const siteUrl = "https://pdf-side-by-side-merger.vercel.app";
+
 export default function AboutPage() {
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": siteUrl },
+      { "@type": "ListItem", "position": 2, "name": "About", "item": `${siteUrl}/about` }
+    ]
+  };
+
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -49,6 +76,10 @@ export default function AboutPage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
@@ -95,10 +126,10 @@ export default function AboutPage() {
             </h2>
             <div className="space-y-4 text-base sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
               <p>
-                A side-by-side PDF merger is a specialized tool that combines two PDF documents by placing their corresponding pages horizontally next to each other. Unlike traditional PDF mergers that stack pages vertically (one document after another), this tool creates a new PDF where page 1 of the first document appears alongside page 1 of the second document, page 2 with page 2, and so on.
+                A side-by-side PDF merger takes two PDF files and combines them horizontally, page by page. Standard PDF mergers stack documents end-to-end, one after the other. This tool does something different: page 1 of your first document appears next to page 1 of your second, page 2 next to page 2, and so on throughout the whole file.
               </p>
               <p>
-                This unique approach to <strong>merging PDFs side by side</strong> is particularly valuable for <Link href="/compare-pdfs-side-by-side" className="text-blue-600 dark:text-blue-400 hover:underline">document comparison</Link>, translation work, and educational materials. Instead of switching between two separate PDFs, you can view both documents simultaneously on a single page, making it easier to spot differences, verify translations, or study parallel content.
+                That makes it genuinely useful for <Link href="/compare-pdfs-side-by-side" className="text-blue-600 dark:text-blue-400 hover:underline">document comparison</Link>, translation review, and educational materials where you need to read two versions in sync. Instead of switching between open windows, you get both on the same page and can just scroll through.
               </p>
             </div>
             
@@ -115,7 +146,7 @@ export default function AboutPage() {
               Common Use Cases
             </h2>
             <p className="text-base sm:text-lg text-gray-700 dark:text-gray-300 mb-6">
-              Our side-by-side PDF merger serves a variety of professional and personal needs:
+              Some common situations where this comes in handy:
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               {/* Document Comparison */}
@@ -242,10 +273,10 @@ export default function AboutPage() {
 
             <div className="space-y-4 text-base sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
               <p>
-                Your document security is our top priority. When you <strong>merge PDFs side by side</strong> using our tool, all processing happens entirely within your web browser. This means your PDF files never leave your device and are never uploaded to our servers or any third-party services.
+                All processing runs inside your browser. Your PDF files never get uploaded to any server, including ours. They exist in your browser's memory during the merge and get cleared when you close the page.
               </p>
               <p>
-                We don't store, track, or have access to your documents. No account creation is required, no cookies are used for tracking, and no data is collected. This browser-based approach ensures complete privacy, making it safe to work with sensitive documents like legal contracts, financial reports, or confidential business materials.
+                No account needed, no tracking cookies, no analytics on what you're working with. If you're handling something sensitive like a legal contract or financial report, you don't have to think twice about using this.
               </p>
             </div>
 
@@ -268,7 +299,7 @@ export default function AboutPage() {
               Why Use a Browser-Based Tool?
             </h2>
             <p className="text-base sm:text-lg text-gray-700 dark:text-gray-300 mb-6">
-              Browser-based PDF tools offer significant advantages over traditional desktop software or server-based services:
+              Desktop software requires installation and updates. Server-based tools require you to trust a third party with your files. Browser-based tools sidestep both problems.
             </p>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6">
@@ -329,7 +360,7 @@ export default function AboutPage() {
             </div>
 
             <p className="text-base sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-              Our tool leverages modern web technologies to provide fast, efficient PDF processing entirely client-side, giving you professional-grade results while maintaining the highest standards of privacy and convenience.
+              Because processing happens in the browser, there's no server to maintain, no queue to wait in, and no file size restrictions imposed from our side. What you can merge is limited only by what your own device can handle.
             </p>
           </section>
 

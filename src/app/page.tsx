@@ -274,16 +274,60 @@ export default function Home() {
           <h2 className="sr-only">Key Features</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {[
-              { icon: '🔒', title: 'Private & Secure', desc: 'All processing happens in your browser' },
-              { icon: '⚡', title: 'Lightning Fast', desc: 'No server uploads, instant processing' },
-              { icon: '🎯', title: 'Easy to Use', desc: 'Simple drag & drop interface' },
-              { icon: '💯', title: 'Always Free', desc: 'No limits, no watermarks' },
+              { icon: '🔒', title: 'Private & Secure', desc: 'All processing happens in your browser — your files never leave your device' },
+              { icon: '⚡', title: 'Lightning Fast', desc: 'No server uploads means no waiting — processing starts instantly' },
+              { icon: '🎯', title: 'Easy to Use', desc: 'Drag and drop two PDFs, choose a layout option, download in seconds' },
+              { icon: '💯', title: 'Always Free', desc: 'No limits, no watermarks, no sign-up required' },
             ].map((feature, idx) => (
               <div key={idx} className="rounded-lg p-6 text-center border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-800/50 hover:shadow-md transition-shadow">
                 <div className="text-4xl mb-3">{feature.icon}</div>
                 <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{feature.title}</h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400">{feature.desc}</p>
               </div>
+            ))}
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="mb-12 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-6">
+            Frequently Asked Questions
+          </h2>
+          <div className="space-y-4 max-w-3xl mx-auto">
+            {[
+              {
+                q: 'How do I put two PDF pages side by side?',
+                a: 'Upload your two PDF files using the upload areas above, choose a page size option, and click Merge. The tool combines them horizontally — page 1 of the first PDF appears next to page 1 of the second — and downloads the result automatically.',
+              },
+              {
+                q: 'Can I merge PDFs without Adobe?',
+                a: 'Yes. This tool requires no software installation and no Adobe subscription. It runs directly in your browser and is completely free.',
+              },
+              {
+                q: 'Is there a free PDF merger with no upload?',
+                a: 'Yes — this tool. All PDF processing happens in your browser using JavaScript. Your files are never sent to any server, so no upload ever occurs.',
+              },
+              {
+                q: 'What happens if my two PDFs have different page counts?',
+                a: 'The tool handles unequal page counts automatically. If one PDF has more pages, the extra pages are included on one side with a blank page on the other.',
+              },
+              {
+                q: 'Does this work on mobile?',
+                a: 'Yes. The tool works on Chrome, Firefox, Safari, and Edge on both desktop and mobile devices.',
+              },
+            ].map((faq, i) => (
+              <details
+                key={i}
+                className="group rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-800/50"
+              >
+                <summary className="flex cursor-pointer items-center justify-between p-4 font-medium text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg">
+                  {faq.q}
+                  <svg className="w-5 h-5 text-gray-500 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </summary>
+                <p className="px-4 pb-4 text-gray-600 dark:text-gray-400">{faq.a}</p>
+              </details>
             ))}
           </div>
         </section>
@@ -299,6 +343,14 @@ export default function Home() {
             {' · '}
             <Link href="/compare-pdfs-side-by-side" className="hover:text-gray-700 dark:hover:text-gray-300 underline">
               Compare PDFs
+            </Link>
+            {' · '}
+            <Link href="/merge-pdf-without-uploading" className="hover:text-gray-700 dark:hover:text-gray-300 underline">
+              Merge Without Uploading
+            </Link>
+            {' · '}
+            <Link href="/dual-language-pdf" className="hover:text-gray-700 dark:hover:text-gray-300 underline">
+              Dual Language PDF
             </Link>
             {' · '}
             <Link href="/about" className="hover:text-gray-700 dark:hover:text-gray-300 underline">

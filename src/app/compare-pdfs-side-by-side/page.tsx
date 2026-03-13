@@ -3,6 +3,22 @@ import Link from 'next/link';
 export const metadata = {
   title: 'Compare PDFs Side by Side Free | No Upload Required',
   description: 'Compare two PDF files side by side without uploading. 100% browser-based, private, and free. Perfect for document comparison and translation review.',
+  alternates: {
+    canonical: '/compare-pdfs-side-by-side',
+  },
+  openGraph: {
+    title: 'Compare PDFs Side by Side Free | No Upload Required',
+    description: 'Compare two PDF files side by side without uploading. 100% browser-based, private, and free. Perfect for document comparison and translation review.',
+    url: '/compare-pdfs-side-by-side',
+    siteName: 'PDF Side-by-Side Merger',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Compare PDFs Side by Side Free | No Upload Required',
+    description: 'Compare two PDF files side by side without uploading. 100% browser-based, private, and free. Perfect for document comparison and translation review.',
+  },
 };
 
 const faqData = [
@@ -46,7 +62,18 @@ const howToSteps = [
   }
 ];
 
+const siteUrl = "https://pdf-side-by-side-merger.vercel.app";
+
 export default function ComparePDFsPage() {
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": siteUrl },
+      { "@type": "ListItem", "position": 2, "name": "Compare PDFs Side by Side", "item": `${siteUrl}/compare-pdfs-side-by-side` }
+    ]
+  };
+
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -81,6 +108,10 @@ export default function ComparePDFsPage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
@@ -129,10 +160,10 @@ export default function ComparePDFsPage() {
           <section>
             <div className="space-y-4 text-base sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
               <p>
-                Comparing PDF documents side by side is essential for professionals who need to identify differences, verify translations, or review document changes. Unlike traditional methods that require switching between files or using complex desktop software, our browser-based tool places both documents horizontally on the same page, making it easy to spot differences at a glance.
+                Switching back and forth between two open PDFs is tedious, and most desktop software that puts documents side by side is either expensive or overkill for a simple comparison task. This tool takes a more direct approach: it combines both PDFs into a single file, with each page showing both documents next to each other, so you can scroll through and compare without juggling windows.
               </p>
               <p>
-                Whether you're comparing contract versions, reviewing translated documents, or analyzing before-and-after changes, our tool provides a simple, secure, and efficient solution. All processing happens directly in your web browser—no file uploads, no server storage, and complete privacy for your sensitive documents.
+                It works entirely in your browser. No files are uploaded, nothing is stored on a server, and your documents stay on your device throughout the process. It's free, it's instant, and it works for contracts, translations, research papers, or anything else you need to read side by side.
               </p>
             </div>
           </section>
@@ -251,10 +282,10 @@ export default function ComparePDFsPage() {
             </h2>
             <div className="space-y-4 text-base sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
               <p>
-                When comparing PDFs, privacy is crucial—especially for sensitive documents like contracts, legal files, or confidential reports. Our tool processes everything in your browser, so your files never leave your device or get uploaded to any server.
+                When you're comparing contracts, legal filings, or anything else confidential, the last thing you want is those files passing through a third-party server. This tool processes everything locally in your browser, so your files stay on your device the whole time.
               </p>
               <p>
-                This means you can safely compare confidential documents without worrying about data breaches, unauthorized access, or third-party storage. <Link href="/about" className="text-blue-600 dark:text-blue-400 hover:underline">Learn more about our privacy and security features</Link>.
+                There's no upload, no account, and no way for anyone else to access what you're working with. <Link href="/about" className="text-blue-600 dark:text-blue-400 hover:underline">Learn more about how the privacy side works</Link>.
               </p>
             </div>
 
